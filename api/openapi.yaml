@@ -1,0 +1,4822 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@gemini-commerce.com
+    name: Gemini Team
+  description: |-
+    ## Introduction
+
+    This comprehensive guide will equip you with the knowledge to integrate and leverage our Product Configurator Service in your applications.
+
+    ## Quick Start
+
+    Get up and running in no time! Follow these steps to kickstart your integration:
+
+    1. **Authentication:** Obtain your integration JWT to authenticate your requests.
+    2. **Client Libraries:** Explore our GitHub repositories to grab client libraries in your preferred programming language.
+    3. **API Overview:** Familiarize yourself with our RESTful API using the OpenAPI specification.
+
+    ## Integration
+
+    ### API Overview
+
+    Our RESTful API is the gateway to unlocking the full potential of Product Configurator. Check out the detailed [API Reference](/docs/category/configurator) for a granular understanding of each endpoint and request/response format.
+
+    ### Client Libraries
+
+    To expedite your integration process, we provide client libraries for various programming languages. Find the one that suits your stack in our [GitHub repositories](https://github.com/Gemini-Commerce).
+
+    ### Authentication
+
+    Security is paramount. Learn how to authenticate your requests using JWT. This ensures a secure and reliable connection between your application and Product Configurator.
+
+    ## Configuration Management
+
+    ### Configurator Lifecycle
+
+    Understand the lifecycle of configurators, from draft to active and deleted. This flexibility allows you to manage configurations at your own pace.
+
+    ### Steps and Options
+
+    Configure product steps with ease and define options effortlessly. Explore the power of dependencies to create dynamic and intuitive configurations.
+
+    ### Matrices
+
+    Delve into matrices—your secret weapon. Explore price and weight matrices, and learn how configured steps influence properties and pricing.
+
+    ### Price Management
+
+    Unleash dynamic pricing with our versatile price matrices. From fixed prices to incremental structures, adapt to diverse pricing models effortlessly.
+
+    ## Security
+
+    Your data is in safe hands. Discover how Product Configurator ensures security through JWT authentication, safeguarding your sensitive information.
+
+    ## Backward Compatibility
+
+    Stay ahead of the curve. Learn about our versioning strategy, providing backward compatibility while allowing our service to evolve seamlessly.
+
+    ## Developer Support
+
+    Have questions? Need assistance? Write to us at [info@gemini-commerce.com](mailto:info@gemini-commerce.com) and we will get back to you.
+  license:
+    name: AGPL-3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  title: Product Configurator Service
+  version: v1
+servers:
+- url: https://product-configurator.api.gogemini.io/
+tags:
+- externalDocs:
+    url: https://gemini-commerce.com/api/product-configurator
+  name: ProductConfigurator
+paths:
+  /v1/{tenantId}/configurator/{configuratorId}:
+    delete:
+      description: Delete a product configurator by specifying the tenant and configurator
+        IDs. Ensure precise removal of unwanted configurations with a straightforward
+        DELETE request.
+      operationId: ProductConfigurator_DeleteConfigurator
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorDeleteResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Delete Configurator
+      tags:
+      - configurator
+    put:
+      description: Modify an existing product configurator by specifying the tenant
+        and configurator IDs. Use a PUT request with the updated configuration details
+        in the body to seamlessly update and manage product configurations
+      operationId: ProductConfigurator_UpdateConfigurator
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateConfigurator_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Configurator
+      tags:
+      - configurator
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/configurator/{configuratorId}/page-size/{pageSize}/matrices:
+    post:
+      description: Retrieve a list of matrices for a specific configurator based on
+        tenant and configurator IDs. Customize results by specifying page size for
+        efficient pagination. Submit an empty body to get all matrices associated
+        with the configurator. Streamline matrix management effortlessly.
+      operationId: ProductConfigurator_ListMatrices
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: uint64
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListMatrices_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/matrixListMatricesResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: List Matrices
+      tags:
+      - matrix
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/configurator/{configuratorId}/page-size/{pageSize}/properties:
+    post:
+      operationId: ProductConfigurator_ListPropertiesByConfiguration
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: uint64
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListPropertiesByConfiguration_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/propertyListPropertiesByConfigurationResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      tags:
+      - ProductConfigurator
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/configurator/{configuratorId}/step/create:
+    post:
+      description: Add a new step to an existing product configurator by specifying
+        the tenant and configurator IDs. Utilize a POST request with the required
+        step details in the body to seamlessly extend the configuration process.
+      operationId: ProductConfigurator_CreateStep
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateStep_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorstepEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Step
+      tags:
+      - step
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/configurator/{configuratorId}/step/create/bulk:
+    post:
+      description: Add multiple steps to an existing product configurator simultaneously.
+        Submit a POST request with the necessary step details in the body to efficiently
+        extend the configuration process in bulk. Simplify large-scale configuration
+        management effortlessly.
+      operationId: ProductConfigurator_BulkCreateSteps
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: configuratorId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkCreateSteps_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorstepBulkCreateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Create Steps
+      tags:
+      - step
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/dependency/{dependencyId}:
+    delete:
+      description: "Remove a specific dependency by specifying the tenant and dependency\
+        \ IDs. Ensure precision in dependency management with a straightforward DELETE\
+        \ request, simplifying the elimination of unwanted configuration logic."
+      operationId: ProductConfigurator_DeleteDependency
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: dependencyId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratordependencyDeleteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Delete Dependency
+      tags:
+      - dependency
+    put:
+      description: Modify an existing dependency by specifying the tenant and dependency
+        IDs. Utilize a PUT request with updated dependency details in the body for
+        seamless customization and fine-tuning of your product configurations.
+      operationId: ProductConfigurator_UpdateDependency
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: dependencyId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateDependency_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratordependencyEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Dependency
+      tags:
+      - dependency
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/matrix/create:
+    post:
+      description: Establish a new matrix by specifying the tenant ID. Utilize a POST
+        request with the required matrix details in the body for seamless customization
+        and expansion of matrix configurations.
+      operationId: ProductConfigurator_CreateMatrix
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateMatrix_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratormatrixEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Matrix
+      tags:
+      - matrix
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/matrix/{matrixId}:
+    delete:
+      description: "Remove a specific matrix by specifying the tenant and matrix IDs.\
+        \ Ensure precision in matrix management with a straightforward DELETE request,\
+        \ simplifying the elimination of unwanted matrix configurations."
+      operationId: ProductConfigurator_DeleteMatrix
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: matrixId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratormatrixDeleteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Delete Matrix
+      tags:
+      - matrix
+    get:
+      description: Retrieve matrix details by specifying the tenant and matrix IDs.
+        Utilize a GET request for a comprehensive view of matrix configurations within
+        your product configurator service.
+      operationId: ProductConfigurator_GetMatrix
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: matrixId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratormatrixEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Matrix
+      tags:
+      - matrix
+    put:
+      description: Modify an existing matrix by specifying the tenant and matrix IDs.
+        Utilize a PUT request with updated matrix details in the body for seamless
+        customization and fine-tuning of your product configurations. Keep your matrices
+        in sync effortlessly.
+      operationId: ProductConfigurator_UpdateMatrix
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: matrixId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateMatrix_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratormatrixEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Matrix
+      tags:
+      - matrix
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/matrix/{matrixId}/page-size/{pageSize}/properties:
+    post:
+      description: Retrieve a list of properties for a specific matrix based on tenant
+        and matrix IDs. Customize results by specifying page size for efficient pagination.
+        Submit an empty body to get all properties associated with the matrix.
+      operationId: ProductConfigurator_ListProperties
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: matrixId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: uint64
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListProperties_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/propertyListPropertiesResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: List Properties
+      tags:
+      - property
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/matrix/{matrixId}/pricelist/{pricelistGrn}:
+    delete:
+      description: "Remove a specific pricelist from a matrix by specifying the tenant,\
+        \ matrix, and pricelist IDs. Use a DELETE request for precise management of\
+        \ pricelist configurations within your product configurator service."
+      operationId: ProductConfigurator_RemovePricelistFromMatrix
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: matrixId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pricelistGrn
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratormatrixEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Remove Pricelist from Matrix
+      tags:
+      - matrix
+  /v1/{tenantId}/option/bulk:
+    put:
+      description: Effortlessly update multiple options. Specify the tenant ID and
+        submit a PUT request with the updated option details in the body. Streamline
+        the customization of a multitude of options in one go.
+      operationId: ProductConfigurator_BulkUpdateOptions
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkUpdateOptions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionBulkUpdateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Update Options
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/option/delete/bulk:
+    post:
+      description: Efficiently remove multiple options from configurations using a
+        bulk delete operation. Specify the tenant ID and submit a POST request with
+        the list of option IDs in the body for streamlined option management.
+      operationId: ProductConfigurator_BulkDeleteOptions
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkDeleteOptions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionBulkDeleteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Delete Options
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/option/{optionId}:
+    delete:
+      description: "Remove a specific option by specifying the tenant and option IDs.\
+        \ Ensure precision in option management with a straightforward DELETE request,\
+        \ simplifying the elimination of unwanted configuration choices."
+      operationId: ProductConfigurator_DeleteOption
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: optionId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionDeleteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Delete Option
+      tags:
+      - option
+    put:
+      description: Modify an existing option by specifying the tenant and option IDs.
+        Utilize a PUT request with updated option details in the body for seamless
+        customization and fine-tuning of your product configurations.
+      operationId: ProductConfigurator_UpdateOption
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: optionId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateOption_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Option
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/option/{sourceOptionId}/copy:
+    post:
+      description: "Duplicate an existing option from the source to a specified tenant.\
+        \ Utilize a POST request with an empty body to initiate the copy process,\
+        \ creating a new option based on the source configuration. Streamline option\
+        \ replication effortlessly."
+      operationId: ProductConfigurator_CopyOption
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: sourceOptionId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CopyOption_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Copy Option
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/page-size/{pageSize}/dependencies:
+    post:
+      description: Retrieve a list of dependencies based on the specified tenant ID.
+        Customize results by specifying page size for efficient pagination. Submit
+        an empty body to get all dependencies associated with the configurations.
+      operationId: ProductConfigurator_ListDependencies
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListDependencies_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dependencyListDependenciesResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: List Dependencies
+      tags:
+      - dependency
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/product/{productId}:
+    get:
+      description: "Retrieve product configurations with status details, filtered\
+        \ by product and tenant IDs. Flexible options for specifying additional status\
+        \ parameters."
+      operationId: ProductConfigurator_GetConfiguratorByProductId
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          default: UNKNOWN
+          enum:
+          - UNKNOWN
+          - ACTIVE
+          - DRAFT
+          - DISABLED
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Configurator by Product ID
+      tags:
+      - configurator
+  /v1/{tenantId}/product/{productId}/configuration:
+    get:
+      description: Retrieve available configurations for a specific product and tenant.
+        Use a GET request for read-only access or submit additional criteria in the
+        body of a POST request for tailored configuration results. Streamline the
+        retrieval of configurations effortlessly.
+      operationId: ProductConfigurator_GetAvailableConfiguration
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - description: "If not set, the service returns the active configurator"
+        in: query
+        name: configuratorId
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurationGetAvailableConfigurationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Available Configuration
+      tags:
+      - configuration
+    post:
+      description: Retrieve available configurations for a specific product and tenant.
+        Use a GET request for read-only access or submit additional criteria in the
+        body of a POST request for tailored configuration results. Streamline the
+        retrieval of configurations effortlessly.
+      operationId: ProductConfigurator_GetAvailableConfiguration2
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_GetAvailableConfiguration2_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurationGetAvailableConfigurationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Available Configuration
+      tags:
+      - configuration
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/product/{productId}/configuration-from-selections:
+    post:
+      description: Retrieve a configuration based on user selections for a specific
+        product and tenant. Submit a POST request with user selections in the body
+        to receive a tailored configuration. Enhance the user experience by dynamically
+        generating configurations based on user input.
+      operationId: ProductConfigurator_GetConfigurationFromSelections
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_GetConfigurationFromSelections_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurationGetConfigurationFromSelectionsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Configuration from Selections
+      tags:
+      - configuration
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/product/{productId}/create:
+    post:
+      description: Create a new product configurator for a specified tenant and product.
+        Submit the desired configuration details in the request body to initiate the
+        creation process.
+      operationId: ProductConfigurator_CreateConfigurator
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateConfigurator_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Configurator
+      tags:
+      - configurator
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/product/{productId}/page-size/{pageSize}/configurators:
+    post:
+      description: List all product configurators.
+      operationId: ProductConfigurator_ListConfigurators
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListProperties_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configuratorListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: List Product Configurators
+      tags:
+      - configurator
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/product/{productId}/status/{status}:
+    get:
+      description: "Retrieve product configurations with status details, filtered\
+        \ by product and tenant IDs. Flexible options for specifying additional status\
+        \ parameters."
+      operationId: ProductConfigurator_GetConfiguratorByProductId2
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: status
+        required: true
+        schema:
+          enum:
+          - UNKNOWN
+          - ACTIVE
+          - DRAFT
+          - DISABLED
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Get Configurator by Product ID
+      tags:
+      - configurator
+  /v1/{tenantId}/product/{sourceConfiguratorId}/copy:
+    post:
+      description: "Duplicate an existing product configurator from the source to\
+        \ the specified tenant and product. Submit an empty body to initiate the copy\
+        \ process, creating a new configuration based on the source."
+      operationId: ProductConfigurator_CopyConfigurator
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: sourceConfiguratorId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CopyConfigurator_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Copy Configurator
+      tags:
+      - configurator
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/properties/bulk:
+    put:
+      description: Effortlessly update multiple properties. Specify the tenant ID
+        and submit a PUT request with the updated property details in the body. Streamline
+        the customization of a multitude of properties in one go.
+      operationId: ProductConfigurator_BulkUpdateProperties
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkUpdateProperties_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorpropertyBulkUpdateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Update Properties
+      tags:
+      - property
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/property/create:
+    post:
+      description: Integrate a new property into configurations by specifying the
+        tenant ID. Use a POST request with the required property details in the body
+        for seamless customization and expansion of product configurations.
+      operationId: ProductConfigurator_CreateProperty
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateProperty_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Property
+      tags:
+      - property
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/property/create/bulk:
+    post:
+      description: Efficiently add multiple properties to configurations with a bulk
+        create operation. Specify the tenant ID and submit a POST request with the
+        necessary property details in the body for streamlined property management.
+      operationId: ProductConfigurator_BulkCreateProperties
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkCreateProperties_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorpropertyBulkCreateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Create Properties
+      tags:
+      - property
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/property/{propertyId}:
+    get:
+      operationId: ProductConfigurator_GetProperty
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: propertyId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      tags:
+      - ProductConfigurator
+    put:
+      description: Modify an existing property by specifying the tenant and property
+        IDs. Utilize a PUT request with updated property details in the body for seamless
+        customization and fine-tuning of your product configurations.
+      operationId: ProductConfigurator_UpdateProperty
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: propertyId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateProperty_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Property
+      tags:
+      - property
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/delete/bulk:
+    post:
+      description: Efficiently remove multiple steps from a product configurator using
+        a bulk delete operation. Specify the tenant ID and submit a POST request with
+        the list of step IDs in the body for streamlined configuration management.
+      operationId: ProductConfigurator_BulkDeleteSteps
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkDeleteSteps_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorstepBulkDeleteResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Delete Steps
+      tags:
+      - step
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{sourceStepId}/copy:
+    post:
+      description: "Duplicate an existing step from the source to a specified tenant.\
+        \ Utilize a POST request with an empty body to initiate the copy process,\
+        \ creating a new step based on the source configuration. Streamline step replication\
+        \ effortlessly."
+      operationId: ProductConfigurator_CopyStep
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: sourceStepId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CopyStep_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorstepEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Copy Step
+      tags:
+      - step
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{stepId}:
+    delete:
+      description: "Remove a step from a product configurator by specifying the tenant\
+        \ and step IDs. Ensure precision in configuration management with a straightforward\
+        \ DELETE request, simplifying the elimination of unwanted steps."
+      operationId: ProductConfigurator_DeleteStep
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Delete Step
+      tags:
+      - step
+    put:
+      description: Modify an existing step within a product configurator by specifying
+        the tenant and step IDs. Utilize a PUT request with updated step details in
+        the body for seamless customization and fine-tuning of your product configurations.
+      operationId: ProductConfigurator_UpdateStep
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_UpdateStep_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratorstepEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Update Step
+      tags:
+      - step
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{stepId}/dependency/create:
+    post:
+      description: Establish a new dependency for an existing step by specifying the
+        tenant and step IDs. Utilize a POST request with the required dependency details
+        in the body to seamlessly enhance the configuration logic of your product.
+      operationId: ProductConfigurator_CreateDependency
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateDependency_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratordependencyEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Dependency
+      tags:
+      - dependency
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{stepId}/option/create:
+    post:
+      description: Integrate a new option into an existing step by specifying the
+        tenant and step IDs. Use a POST request with the required option details in
+        the body for seamless customization and expansion of product configurations.
+      operationId: ProductConfigurator_CreateOption
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_CreateOption_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Create Option
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{stepId}/option/create/bulk:
+    post:
+      description: Add multiple options to an existing step simultaneously. Submit
+        a POST request with the necessary option details in the body to efficiently
+        expand the configuration possibilities in bulk. Streamline large-scale option
+        management effortlessly.
+      operationId: ProductConfigurator_BulkCreateOptions
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_BulkCreateOptions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productconfiguratoroptionBulkCreateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: Bulk Create Options
+      tags:
+      - option
+      x-codegen-request-body-name: body
+  /v1/{tenantId}/step/{stepId}/page-size/{pageSize}/options:
+    post:
+      description: Retrieve a list of options for a specific step based on tenant
+        and step IDs. Customize results by specifying page size for efficient pagination.
+        Submit an empty body to get all options associated with the step.
+      operationId: ProductConfigurator_ListOptions
+      parameters:
+      - in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: stepId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pageSize
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductConfigurator_ListProperties_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/optionListOptionsResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Bad Request or Limit Exceeded
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+          description: An unexpected error response.
+      security:
+      - APIAuthorization: []
+        standardAuthorization: []
+      summary: List Options
+      tags:
+      - option
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    ConfigurationStepOption:
+      example:
+        grn: grn
+        swatch:
+          grn: grn
+          url: url
+        hasQuantity: true
+        id: id
+        label:
+          value:
+            key: value
+        optionProperties:
+        - subtractToGetVariation:
+          - subtractToGetVariation
+          - subtractToGetVariation
+          propertyType: null
+          propertyValue: propertyValue
+          propertyId: propertyId
+        - subtractToGetVariation:
+          - subtractToGetVariation
+          - subtractToGetVariation
+          propertyType: null
+          propertyValue: propertyValue
+          propertyId: propertyId
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+        optionProperties:
+          items:
+            $ref: '#/components/schemas/configurationOptionProperty'
+          type: array
+        hasQuantity:
+          type: boolean
+      type: object
+    ListMatricesRequestFilter:
+      properties:
+        propertyType:
+          items:
+            $ref: '#/components/schemas/productconfiguratorPropertyType'
+          type: array
+        propertyKey:
+          items:
+            type: string
+          type: array
+      type: object
+    configurationConfigurationStep:
+      example:
+        grn: grn
+        options:
+        - grn: grn
+          swatch:
+            grn: grn
+            url: url
+          hasQuantity: true
+          id: id
+          label:
+            value:
+              key: value
+          optionProperties:
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+        - grn: grn
+          swatch:
+            grn: grn
+            url: url
+          hasQuantity: true
+          id: id
+          label:
+            value:
+              key: value
+          optionProperties:
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+        id: id
+        label:
+          value:
+            key: value
+        hasMultipleSelection: true
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        options:
+          items:
+            $ref: '#/components/schemas/ConfigurationStepOption'
+          type: array
+        hasMultipleSelection:
+          type: boolean
+      type: object
+    configurationConfigurator:
+      example:
+        grn: grn
+        id: id
+        steps:
+        - isRequired: true
+          grn: grn
+          options:
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            enabled: true
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            enabled: true
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          enabled: true
+        - isRequired: true
+          grn: grn
+          options:
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            enabled: true
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            enabled: true
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          enabled: true
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfigurationStep'
+          type: array
+      type: object
+    configurationGetAvailableConfigurationResponse:
+      example:
+        configurator:
+          grn: grn
+          id: id
+          steps:
+          - isRequired: true
+            grn: grn
+            options:
+            - grn: grn
+              swatch:
+                grn: grn
+                url: url
+              hasQuantity: true
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              optionProperties:
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              enabled: true
+            - grn: grn
+              swatch:
+                grn: grn
+                url: url
+              hasQuantity: true
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              optionProperties:
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              enabled: true
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            enabled: true
+          - isRequired: true
+            grn: grn
+            options:
+            - grn: grn
+              swatch:
+                grn: grn
+                url: url
+              hasQuantity: true
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              optionProperties:
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              enabled: true
+            - grn: grn
+              swatch:
+                grn: grn
+                url: url
+              hasQuantity: true
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              optionProperties:
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              - subtractToGetVariation:
+                - subtractToGetVariation
+                - subtractToGetVariation
+                propertyType: null
+                propertyValue: propertyValue
+                propertyId: propertyId
+              enabled: true
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            enabled: true
+        selections:
+        - stepId: stepId
+          optionIds:
+          - optionIds
+          - optionIds
+        - stepId: stepId
+          optionIds:
+          - optionIds
+          - optionIds
+        matchedProperties:
+        - propertyKey: propertyKey
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          propertyMode: null
+        - propertyKey: propertyKey
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          propertyMode: null
+      properties:
+        configurator:
+          $ref: '#/components/schemas/configurationConfigurator'
+        matchedProperties:
+          items:
+            $ref: '#/components/schemas/configurationProperty'
+          type: array
+        selections:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfigurationSelection'
+          type: array
+      type: object
+    configurationGetConfigurationFromSelectionsResponse:
+      example:
+        matchedProperties:
+        - propertyKey: propertyKey
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          propertyMode: null
+        - propertyKey: propertyKey
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          propertyMode: null
+        steps:
+        - grn: grn
+          options:
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+          id: id
+          label:
+            value:
+              key: value
+          hasMultipleSelection: true
+        - grn: grn
+          options:
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+          - grn: grn
+            swatch:
+              grn: grn
+              url: url
+            hasQuantity: true
+            id: id
+            label:
+              value:
+                key: value
+            optionProperties:
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+            - subtractToGetVariation:
+              - subtractToGetVariation
+              - subtractToGetVariation
+              propertyType: null
+              propertyValue: propertyValue
+              propertyId: propertyId
+          id: id
+          label:
+            value:
+              key: value
+          hasMultipleSelection: true
+      properties:
+        steps:
+          items:
+            $ref: '#/components/schemas/configurationConfigurationStep'
+          type: array
+        matchedProperties:
+          items:
+            $ref: '#/components/schemas/configurationProperty'
+          type: array
+      type: object
+    configurationOptionProperty:
+      example:
+        subtractToGetVariation:
+        - subtractToGetVariation
+        - subtractToGetVariation
+        propertyType: null
+        propertyValue: propertyValue
+        propertyId: propertyId
+      properties:
+        propertyId:
+          type: string
+        propertyValue:
+          type: string
+        propertyType:
+          $ref: '#/components/schemas/productconfiguratorPropertyType'
+        subtractToGetVariation:
+          description: subtract_to_get_variation is a list of values and is used to
+            calculate the variation from the property value.
+          items:
+            type: string
+          type: array
+      type: object
+    configurationProperty:
+      example:
+        propertyKey: propertyKey
+        grn: grn
+        propertyType: null
+        propertyValue: propertyValue
+        id: id
+        optionIds:
+        - optionIds
+        - optionIds
+        propertyMode: null
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        optionIds:
+          items:
+            type: string
+          type: array
+        propertyKey:
+          type: string
+        propertyValue:
+          type: string
+        propertyType:
+          $ref: '#/components/schemas/productconfiguratorPropertyType'
+        propertyMode:
+          $ref: '#/components/schemas/productconfiguratorPropertyMode'
+      type: object
+    configurationPropertyFilter:
+      properties:
+        genericProperty:
+          $ref: '#/components/schemas/configurationPropertyFilterGenericProperty'
+        priceProperty:
+          type: object
+        weightProperty:
+          type: object
+      type: object
+    configurationPropertyFilterGenericProperty:
+      properties:
+        propertyKey:
+          type: string
+      type: object
+    configurationPropertyFilterPriceProperty:
+      type: object
+    configurationPropertyFilterWeightProperty:
+      type: object
+    configuratorListResponse:
+      example:
+        nextPageToken: nextPageToken
+        configurators:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          productId: productId
+          id: id
+          label: label
+          steps:
+          - isRequired: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            optionsHaveQuantity: true
+            options:
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - isRequired: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            optionsHaveQuantity: true
+            options:
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          status: null
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          productId: productId
+          id: id
+          label: label
+          steps:
+          - isRequired: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            optionsHaveQuantity: true
+            options:
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - isRequired: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            optionsHaveQuantity: true
+            options:
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - externalReferenceId: externalReferenceId
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              grn: grn
+              swatch:
+                grn: grn
+                url: url
+              id: id
+              label:
+                value:
+                  key: value
+              position: position
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            description:
+              value:
+                key: value
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            hasMultipleSelection: true
+            subjectToStepId: subjectToStepId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          status: null
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        configurators:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfiguratorEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    dependencyCondition:
+      example:
+        conditions:
+        - null
+        - null
+        type: null
+        optionIds:
+        - optionIds
+        - optionIds
+      properties:
+        optionIds:
+          items:
+            type: string
+          title: the option ids that must be selected by previous steps in order for
+            this condition to be true
+          type: array
+        conditions:
+          items:
+            $ref: '#/components/schemas/dependencyCondition'
+          title: the conditions that must be true for this condition to be true
+          type: array
+        type:
+          $ref: '#/components/schemas/productconfiguratordependencyType'
+      title: |-
+        A dependency condition
+          options_ids and condition are mutually exclusive
+      type: object
+    dependencyListDependenciesResponse:
+      example:
+        nextPageToken: nextPageToken
+        dependencies:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          condition:
+            conditions:
+            - null
+            - null
+            type: null
+            optionIds:
+            - optionIds
+            - optionIds
+          stepId: stepId
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          condition:
+            conditions:
+            - null
+            - null
+            type: null
+            optionIds:
+            - optionIds
+            - optionIds
+          stepId: stepId
+          id: id
+          optionIds:
+          - optionIds
+          - optionIds
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        dependencies:
+          items:
+            $ref: '#/components/schemas/productconfiguratordependencyEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    googlerpcStatus:
+      example:
+        code: 0
+        details:
+        - '@type': '@type'
+        - '@type': '@type'
+        message: message
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+          type: array
+      type: object
+    localisationLocalizedText:
+      example:
+        value:
+          key: value
+      properties:
+        value:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    matrixGenericType:
+      example:
+        propertyKey: propertyKey
+      properties:
+        propertyKey:
+          type: string
+      type: object
+    matrixListMatricesResponse:
+      example:
+        nextPageToken: nextPageToken
+        matrices:
+        - defaultPropertyId: defaultPropertyId
+          weightType:
+            weightUnit: null
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertiesMode: null
+          priceType:
+            pricelistGrns:
+            - pricelistGrns
+            - pricelistGrns
+          id: id
+          label: label
+          genericType:
+            propertyKey: propertyKey
+          configuratorId: configuratorId
+          steps:
+          - stepId: stepId
+          - stepId: stepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - defaultPropertyId: defaultPropertyId
+          weightType:
+            weightUnit: null
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertiesMode: null
+          priceType:
+            pricelistGrns:
+            - pricelistGrns
+            - pricelistGrns
+          id: id
+          label: label
+          genericType:
+            propertyKey: propertyKey
+          configuratorId: configuratorId
+          steps:
+          - stepId: stepId
+          - stepId: stepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        matrices:
+          items:
+            $ref: '#/components/schemas/productconfiguratormatrixEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    matrixPriceType:
+      example:
+        pricelistGrns:
+        - pricelistGrns
+        - pricelistGrns
+      properties:
+        pricelistGrns:
+          items:
+            type: string
+          type: array
+      type: object
+    matrixWeightType:
+      example:
+        weightUnit: null
+      properties:
+        weightUnit:
+          $ref: '#/components/schemas/productconfiguratorWeightUnit'
+      type: object
+    optionListOptionsResponse:
+      example:
+        nextPageToken: nextPageToken
+        options:
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    optionSwatch:
+      example:
+        grn: grn
+        url: url
+      properties:
+        grn:
+          type: string
+        url:
+          type: string
+      type: object
+    productconfiguratorMoney:
+      description: Represents an amount of money.
+      properties:
+        units:
+          description: |-
+            The whole units of the amount.
+            For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+          format: int64
+          type: string
+        micros:
+          description: |-
+            Number of micro (10^-6) units of the amount.
+            The value must be between -999,999 and +999,999 inclusive.
+            If `units` is positive, `micros` must be positive or zero.
+            If `units` is zero, `micros` can be positive, zero, or negative.
+            If `units` is negative, `micros` must be negative or zero.
+            For example $-1.75 is represented as `units`=-1 and `micros`=-750,000.
+          format: int32
+          type: integer
+      type: object
+    productconfiguratorPropertyMode:
+      default: PROPERTY_MODE_UNKNOWN
+      enum:
+      - PROPERTY_MODE_UNKNOWN
+      - PROPERTY_MODE_FINAL
+      - PROPERTY_MODE_INCREMENTAL
+      title: |-
+        - PROPERTY_MODE_UNKNOWN: Default value if not specified
+         - PROPERTY_MODE_FINAL: Final/Finite property
+         - PROPERTY_MODE_INCREMENTAL: Incremental property
+      type: string
+    productconfiguratorPropertyType:
+      default: PROPERTY_TYPE_UNKNOWN
+      enum:
+      - PROPERTY_TYPE_UNKNOWN
+      - PROPERTY_TYPE_GENERIC
+      - PROPERTY_TYPE_PRICE
+      - PROPERTY_TYPE_WEIGHT
+      type: string
+    productconfiguratorWeightUnit:
+      default: WEIGHT_UNIT_UNKNOWN
+      enum:
+      - WEIGHT_UNIT_UNKNOWN
+      - WEIGHT_UNIT_KILOGRAM
+      - WEIGHT_UNIT_POUND
+      type: string
+    productconfiguratorconfigurationOption:
+      example:
+        grn: grn
+        swatch:
+          grn: grn
+          url: url
+        hasQuantity: true
+        id: id
+        label:
+          value:
+            key: value
+        position: position
+        optionProperties:
+        - subtractToGetVariation:
+          - subtractToGetVariation
+          - subtractToGetVariation
+          propertyType: null
+          propertyValue: propertyValue
+          propertyId: propertyId
+        - subtractToGetVariation:
+          - subtractToGetVariation
+          - subtractToGetVariation
+          propertyType: null
+          propertyValue: propertyValue
+          propertyId: propertyId
+        enabled: true
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+        enabled:
+          type: boolean
+        optionProperties:
+          items:
+            $ref: '#/components/schemas/configurationOptionProperty'
+          type: array
+        hasQuantity:
+          type: boolean
+      type: object
+    productconfiguratorconfigurationSelection:
+      example:
+        stepId: stepId
+        optionIds:
+        - optionIds
+        - optionIds
+      properties:
+        stepId:
+          type: string
+        optionIds:
+          items:
+            type: string
+          type: array
+      type: object
+    productconfiguratorconfigurationStep:
+      example:
+        isRequired: true
+        grn: grn
+        options:
+        - grn: grn
+          swatch:
+            grn: grn
+            url: url
+          hasQuantity: true
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          optionProperties:
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          enabled: true
+        - grn: grn
+          swatch:
+            grn: grn
+            url: url
+          hasQuantity: true
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          optionProperties:
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          - subtractToGetVariation:
+            - subtractToGetVariation
+            - subtractToGetVariation
+            propertyType: null
+            propertyValue: propertyValue
+            propertyId: propertyId
+          enabled: true
+        description:
+          value:
+            key: value
+        id: id
+        label:
+          value:
+            key: value
+        position: position
+        hasMultipleSelection: true
+        subjectToStepId: subjectToStepId
+        enabled: true
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        description:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        subjectToStepId:
+          type: string
+        position:
+          format: uint64
+          type: string
+        isRequired:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfigurationOption'
+          type: array
+        enabled:
+          type: boolean
+        hasMultipleSelection:
+          type: boolean
+      type: object
+    productconfiguratorconfiguratorDeleteResponse:
+      type: object
+    productconfiguratorconfiguratorEntity:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        productId: productId
+        id: id
+        label: label
+        steps:
+        - isRequired: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          optionsHaveQuantity: true
+          options:
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - isRequired: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          optionsHaveQuantity: true
+          options:
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        status: null
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        productId:
+          type: string
+        label:
+          type: string
+        status:
+          $ref: '#/components/schemas/productconfiguratorconfiguratorStatus'
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratorstepEntity'
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratorconfiguratorStatus:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ACTIVE
+      - DRAFT
+      - DISABLED
+      type: string
+    productconfiguratorconfiguratorUpdatePayload:
+      properties:
+        label:
+          type: string
+        status:
+          $ref: '#/components/schemas/productconfiguratorconfiguratorStatus'
+      type: object
+    productconfiguratordependencyDeleteResponse:
+      type: object
+    productconfiguratordependencyEntity:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        condition:
+          conditions:
+          - null
+          - null
+          type: null
+          optionIds:
+          - optionIds
+          - optionIds
+        stepId: stepId
+        id: id
+        optionIds:
+        - optionIds
+        - optionIds
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        optionIds:
+          items:
+            type: string
+          title: "The option ids owned by the step id, that will be shown if the condition\
+            \ is met"
+          type: array
+        condition:
+          $ref: '#/components/schemas/dependencyCondition'
+        stepId:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratordependencyType:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ALL
+      - ANY
+      type: string
+    productconfiguratordependencyUpdatePayload:
+      properties:
+        optionIds:
+          items:
+            type: string
+          type: array
+        condition:
+          $ref: '#/components/schemas/dependencyCondition'
+      type: object
+    productconfiguratormatrixDeleteResponse:
+      type: object
+    productconfiguratormatrixEntity:
+      example:
+        defaultPropertyId: defaultPropertyId
+        weightType:
+          weightUnit: null
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        propertiesMode: null
+        priceType:
+          pricelistGrns:
+          - pricelistGrns
+          - pricelistGrns
+        id: id
+        label: label
+        genericType:
+          propertyKey: propertyKey
+        configuratorId: configuratorId
+        steps:
+        - stepId: stepId
+        - stepId: stepId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        configuratorId:
+          type: string
+        label:
+          type: string
+        defaultPropertyId:
+          type: string
+        propertiesMode:
+          $ref: '#/components/schemas/productconfiguratorPropertyMode'
+        genericType:
+          $ref: '#/components/schemas/matrixGenericType'
+        priceType:
+          $ref: '#/components/schemas/matrixPriceType'
+        weightType:
+          $ref: '#/components/schemas/matrixWeightType'
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratormatrixStep'
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratormatrixStep:
+      example:
+        stepId: stepId
+      properties:
+        stepId:
+          type: string
+      type: object
+    productconfiguratormatrixUpdatePayload:
+      properties:
+        label:
+          type: string
+        defaultPropertyId:
+          description: |-
+            default_property_id is the id of the property
+            that will be used as the starting point to calculate the differences between the properties.
+          type: string
+        propertiesMode:
+          $ref: '#/components/schemas/productconfiguratorPropertyMode'
+        steps:
+          description: steps are the same as in the create request. This is a full
+            replacement.
+          items:
+            $ref: '#/components/schemas/productconfiguratormatrixStep'
+          type: array
+      type: object
+    productconfiguratoroptionBulkCreateRequestCreateEntity:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        externalReferenceId:
+          type: string
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+      type: object
+    productconfiguratoroptionBulkCreateResponse:
+      example:
+        options:
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          type: array
+      type: object
+    productconfiguratoroptionBulkDeleteResponse:
+      type: object
+    productconfiguratoroptionBulkUpdateRequestUpdateEntity:
+      properties:
+        optionId:
+          type: string
+        payload:
+          $ref: '#/components/schemas/productconfiguratoroptionUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    productconfiguratoroptionBulkUpdateResponse:
+      example:
+        options:
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          type: array
+      type: object
+    productconfiguratoroptionDeleteResponse:
+      type: object
+    productconfiguratoroptionEntity:
+      example:
+        externalReferenceId: externalReferenceId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        swatch:
+          grn: grn
+          url: url
+        id: id
+        label:
+          value:
+            key: value
+        position: position
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+        externalReferenceId:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratoroptionUpdatePayload:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        externalReferenceId:
+          type: string
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+      type: object
+    productconfiguratorpropertyBulkCreateRequestCreateEntity:
+      properties:
+        stepIdToOptionId:
+          additionalProperties:
+            type: string
+          type: object
+        genericProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyGenericProperty'
+        priceProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyPriceProperty'
+        weightProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyWeightProperty'
+      type: object
+    productconfiguratorpropertyBulkCreateResponse:
+      example:
+        properties:
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          type: array
+      type: object
+    productconfiguratorpropertyBulkUpdateRequestUpdateEntity:
+      properties:
+        propertyId:
+          type: string
+        payload:
+          $ref: '#/components/schemas/productconfiguratorpropertyUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    productconfiguratorpropertyBulkUpdateResponse:
+      example:
+        properties:
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          type: array
+      type: object
+    productconfiguratorpropertyEntity:
+      example:
+        propertyKey: propertyKey
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        propertyType: null
+        propertyValue: propertyValue
+        id: id
+        stepIdToOptionId:
+          key: stepIdToOptionId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        stepIdToOptionId:
+          additionalProperties:
+            type: string
+          type: object
+        propertyKey:
+          type: string
+        propertyValue:
+          type: string
+        propertyType:
+          $ref: '#/components/schemas/productconfiguratorPropertyType'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratorpropertyGenericProperty:
+      properties:
+        propertyKey:
+          type: string
+        propertyValue:
+          type: string
+      type: object
+    productconfiguratorpropertyPriceProperty:
+      properties:
+        price:
+          $ref: '#/components/schemas/productconfiguratorMoney'
+        pricelistGrn:
+          type: string
+      type: object
+    productconfiguratorpropertyUpdatePayload:
+      properties:
+        genericProperty:
+          $ref: '#/components/schemas/propertyUpdatePayloadGenericProperty'
+        weightProperty:
+          $ref: '#/components/schemas/propertyUpdatePayloadWeightProperty'
+        priceProperty:
+          $ref: '#/components/schemas/propertyUpdatePayloadPriceProperty'
+      type: object
+    productconfiguratorpropertyWeightProperty:
+      properties:
+        weight:
+          format: double
+          type: number
+        weightUnit:
+          $ref: '#/components/schemas/productconfiguratorWeightUnit'
+      type: object
+    productconfiguratorstepBulkCreateRequestCreateEntity:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        description:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        isRequired:
+          type: boolean
+        subjectToStepId:
+          type: string
+        hasMultipleSelection:
+          type: boolean
+        optionsHaveQuantity:
+          type: boolean
+      type: object
+    productconfiguratorstepBulkCreateResponse:
+      example:
+        steps:
+        - isRequired: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          optionsHaveQuantity: true
+          options:
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - isRequired: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          optionsHaveQuantity: true
+          options:
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - externalReferenceId: externalReferenceId
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            grn: grn
+            swatch:
+              grn: grn
+              url: url
+            id: id
+            label:
+              value:
+                key: value
+            position: position
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          description:
+            value:
+              key: value
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          hasMultipleSelection: true
+          subjectToStepId: subjectToStepId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratorstepEntity'
+          type: array
+      type: object
+    productconfiguratorstepBulkDeleteResponse:
+      type: object
+    productconfiguratorstepDeleteResponse:
+      type: object
+    productconfiguratorstepEntity:
+      example:
+        isRequired: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        grn: grn
+        optionsHaveQuantity: true
+        options:
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - externalReferenceId: externalReferenceId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          swatch:
+            grn: grn
+            url: url
+          id: id
+          label:
+            value:
+              key: value
+          position: position
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        description:
+          value:
+            key: value
+        id: id
+        label:
+          value:
+            key: value
+        position: position
+        hasMultipleSelection: true
+        subjectToStepId: subjectToStepId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        grn:
+          type: string
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        description:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        subjectToStepId:
+          type: string
+        position:
+          format: uint64
+          type: string
+        isRequired:
+          type: boolean
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionEntity'
+          type: array
+        hasMultipleSelection:
+          type: boolean
+        optionsHaveQuantity:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    productconfiguratorstepUpdatePayload:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        description:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        isRequired:
+          type: boolean
+        subjectToStepId:
+          type: string
+        hasMultipleSelection:
+          type: boolean
+        optionsHaveQuantity:
+          type: boolean
+      type: object
+    propertyListPropertiesByConfigurationRequestSelection:
+      properties:
+        stepId:
+          type: string
+        optionId:
+          type: string
+      type: object
+    propertyListPropertiesByConfigurationResponse:
+      example:
+        nextPageToken: nextPageToken
+        properties:
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    propertyListPropertiesResponse:
+      example:
+        nextPageToken: nextPageToken
+        properties:
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - propertyKey: propertyKey
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          grn: grn
+          propertyType: null
+          propertyValue: propertyValue
+          id: id
+          stepIdToOptionId:
+            key: stepIdToOptionId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyEntity'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    propertyUpdatePayloadGenericProperty:
+      properties:
+        propertyValue:
+          type: string
+      type: object
+    propertyUpdatePayloadPriceProperty:
+      properties:
+        price:
+          $ref: '#/components/schemas/productconfiguratorMoney'
+        pricelistGrn:
+          type: string
+      type: object
+    propertyUpdatePayloadWeightProperty:
+      properties:
+        weight:
+          format: double
+          type: number
+      type: object
+    protobufAny:
+      additionalProperties:
+        type: object
+      example:
+        '@type': '@type'
+      properties:
+        '@type':
+          type: string
+      type: object
+    ProductConfigurator_UpdateConfigurator_request:
+      properties:
+        payload:
+          $ref: '#/components/schemas/productconfiguratorconfiguratorUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_ListMatrices_request:
+      properties:
+        filterMask:
+          type: string
+        filter:
+          $ref: '#/components/schemas/ListMatricesRequestFilter'
+        pageToken:
+          type: string
+      type: object
+    ProductConfigurator_ListPropertiesByConfiguration_request:
+      properties:
+        selections:
+          items:
+            $ref: '#/components/schemas/propertyListPropertiesByConfigurationRequestSelection'
+          type: array
+        propertyType:
+          $ref: '#/components/schemas/productconfiguratorPropertyType'
+        pageToken:
+          type: string
+      type: object
+    ProductConfigurator_CreateStep_request:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        description:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        isRequired:
+          type: boolean
+        subjectToStepId:
+          type: string
+        hasMultipleSelection:
+          type: boolean
+        optionsHaveQuantity:
+          type: boolean
+      type: object
+    ProductConfigurator_BulkCreateSteps_request:
+      properties:
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratorstepBulkCreateRequestCreateEntity'
+          type: array
+      type: object
+    ProductConfigurator_UpdateDependency_request:
+      properties:
+        payload:
+          $ref: '#/components/schemas/productconfiguratordependencyUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_CreateMatrix_request:
+      properties:
+        configuratorId:
+          type: string
+        label:
+          type: string
+        genericType:
+          $ref: '#/components/schemas/matrixGenericType'
+        priceType:
+          $ref: '#/components/schemas/matrixPriceType'
+        weightType:
+          $ref: '#/components/schemas/matrixWeightType'
+        steps:
+          items:
+            $ref: '#/components/schemas/productconfiguratormatrixStep'
+          type: array
+        propertiesMode:
+          $ref: '#/components/schemas/productconfiguratorPropertyMode'
+      type: object
+    ProductConfigurator_UpdateMatrix_request:
+      properties:
+        payload:
+          $ref: '#/components/schemas/productconfiguratormatrixUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_ListProperties_request:
+      properties:
+        pageToken:
+          type: string
+      type: object
+    ProductConfigurator_BulkUpdateOptions_request:
+      properties:
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionBulkUpdateRequestUpdateEntity'
+          type: array
+      type: object
+    ProductConfigurator_BulkDeleteOptions_request:
+      properties:
+        optionIds:
+          items:
+            type: string
+          type: array
+      type: object
+    ProductConfigurator_UpdateOption_request:
+      properties:
+        payload:
+          $ref: '#/components/schemas/productconfiguratoroptionUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_CopyOption_request:
+      properties:
+        targetStepId:
+          type: string
+      type: object
+    ProductConfigurator_ListDependencies_request:
+      properties:
+        stepIds:
+          items:
+            type: string
+          type: array
+        pageToken:
+          type: string
+      type: object
+    ProductConfigurator_GetAvailableConfiguration2_request:
+      properties:
+        selections:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfigurationSelection'
+          type: array
+        propertyFilters:
+          items:
+            $ref: '#/components/schemas/configurationPropertyFilter'
+          type: array
+        configuratorId:
+          title: "If not set, the service returns the active configurator"
+          type: string
+      type: object
+    ProductConfigurator_GetConfigurationFromSelections_request:
+      properties:
+        selections:
+          items:
+            $ref: '#/components/schemas/productconfiguratorconfigurationSelection'
+          type: array
+      type: object
+    ProductConfigurator_CreateConfigurator_request:
+      properties:
+        label:
+          type: string
+      type: object
+    ProductConfigurator_CopyConfigurator_request:
+      properties:
+        targetProductId:
+          type: string
+        copyDependencies:
+          title: "If true, copy all dependencies of the source configurator"
+          type: boolean
+        copyMatrices:
+          title: "If true, copy all matrices of the source configurator"
+          type: boolean
+      type: object
+    ProductConfigurator_BulkUpdateProperties_request:
+      properties:
+        matrixId:
+          type: string
+        entities:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyBulkUpdateRequestUpdateEntity'
+          type: array
+      type: object
+    ProductConfigurator_CreateProperty_request:
+      properties:
+        matrixId:
+          type: string
+        stepIdToOptionId:
+          additionalProperties:
+            type: string
+          type: object
+        genericProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyGenericProperty'
+        priceProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyPriceProperty'
+        weightProperty:
+          $ref: '#/components/schemas/productconfiguratorpropertyWeightProperty'
+      type: object
+    ProductConfigurator_BulkCreateProperties_request:
+      properties:
+        matrixId:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/productconfiguratorpropertyBulkCreateRequestCreateEntity'
+          type: array
+      type: object
+    ProductConfigurator_UpdateProperty_request:
+      properties:
+        matrixId:
+          type: string
+        payload:
+          $ref: '#/components/schemas/productconfiguratorpropertyUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_BulkDeleteSteps_request:
+      properties:
+        stepIds:
+          items:
+            type: string
+          type: array
+      type: object
+    ProductConfigurator_CopyStep_request:
+      properties:
+        targetConfiguratorId:
+          type: string
+      type: object
+    ProductConfigurator_UpdateStep_request:
+      properties:
+        payload:
+          $ref: '#/components/schemas/productconfiguratorstepUpdatePayload'
+        payloadMask:
+          type: string
+      type: object
+    ProductConfigurator_CreateDependency_request:
+      properties:
+        optionIds:
+          items:
+            type: string
+          title: "The option ids owned by the step id, that will be shown if the condition\
+            \ is met"
+          type: array
+        condition:
+          $ref: '#/components/schemas/dependencyCondition'
+      type: object
+    ProductConfigurator_CreateOption_request:
+      properties:
+        label:
+          $ref: '#/components/schemas/localisationLocalizedText'
+        position:
+          format: uint64
+          type: string
+        externalReferenceId:
+          type: string
+        swatch:
+          $ref: '#/components/schemas/optionSwatch'
+      type: object
+    ProductConfigurator_BulkCreateOptions_request:
+      properties:
+        options:
+          items:
+            $ref: '#/components/schemas/productconfiguratoroptionBulkCreateRequestCreateEntity'
+          type: array
+      type: object
+  securitySchemes:
+    APIAuthorization:
+      in: header
+      name: Authorization
+      type: apiKey
+    standardAuthorization:
+      flows:
+        implicit:
+          authorizationUrl: https://iambackoffice.gogemini.io/iambackoffice.IamBackoffice/Login
+          scopes: {}
+      type: oauth2
+x-original-swagger-version: "2.0"
+
