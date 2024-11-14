@@ -1,4 +1,4 @@
-# product-configurator.Api.ProductConfiguratorApi
+# productconfigurator.Api.ProductConfiguratorApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -17,9 +17,9 @@ All URIs are relative to *https://product-configurator.api.gogemini.io*
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -107,9 +107,9 @@ No authorization required
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {

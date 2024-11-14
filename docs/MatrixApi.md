@@ -1,4 +1,4 @@
-# product-configurator.Api.MatrixApi
+# productconfigurator.Api.MatrixApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -23,9 +23,9 @@ Establish a new matrix by specifying the tenant ID. Utilize a POST request with 
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -127,9 +127,9 @@ Remove a specific matrix by specifying the tenant and matrix IDs. Ensure precisi
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -231,9 +231,9 @@ Retrieve matrix details by specifying the tenant and matrix IDs. Utilize a GET r
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -335,9 +335,9 @@ Retrieve a list of matrices for a specific configurator based on tenant and conf
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -443,9 +443,9 @@ Remove a specific pricelist from a matrix by specifying the tenant, matrix, and 
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -549,9 +549,9 @@ Modify an existing matrix by specifying the tenant and matrix IDs. Utilize a PUT
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {

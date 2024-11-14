@@ -1,4 +1,4 @@
-# product-configurator.Api.DependencyApi
+# productconfigurator.Api.DependencyApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -21,9 +21,9 @@ Establish a new dependency for an existing step by specifying the tenant and ste
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -127,9 +127,9 @@ Remove a specific dependency by specifying the tenant and dependency IDs. Ensure
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -231,9 +231,9 @@ Retrieve a list of dependencies based on the specified tenant ID. Customize resu
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -337,9 +337,9 @@ Modify an existing dependency by specifying the tenant and dependency IDs. Utili
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {

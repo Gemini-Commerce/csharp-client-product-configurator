@@ -1,4 +1,4 @@
-# product-configurator.Api.PropertyApi
+# productconfigurator.Api.PropertyApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -22,9 +22,9 @@ Efficiently add multiple properties to configurations with a bulk create operati
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -126,9 +126,9 @@ Effortlessly update multiple properties. Specify the tenant ID and submit a PUT 
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -230,9 +230,9 @@ Integrate a new property into configurations by specifying the tenant ID. Use a 
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -334,9 +334,9 @@ Retrieve a list of properties for a specific matrix based on tenant and matrix I
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -442,9 +442,9 @@ Modify an existing property by specifying the tenant and property IDs. Utilize a
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {

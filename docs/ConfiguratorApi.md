@@ -1,4 +1,4 @@
-# product-configurator.Api.ConfiguratorApi
+# productconfigurator.Api.ConfiguratorApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -24,9 +24,9 @@ Duplicate an existing product configurator from the source to the specified tena
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -130,9 +130,9 @@ Create a new product configurator for a specified tenant and product. Submit the
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -235,9 +235,9 @@ Delete a product configurator by specifying the tenant and configurator IDs. Ens
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -338,9 +338,9 @@ Retrieve product configurations with status details, filtered by product and ten
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -443,9 +443,9 @@ Retrieve product configurations with status details, filtered by product and ten
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -548,9 +548,9 @@ List all product configurators.
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -656,9 +656,9 @@ Modify an existing product configurator by specifying the tenant and configurato
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {

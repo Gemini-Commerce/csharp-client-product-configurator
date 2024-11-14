@@ -2502,13 +2502,13 @@ components:
         - subtractToGetVariation:
           - subtractToGetVariation
           - subtractToGetVariation
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           propertyId: propertyId
         - subtractToGetVariation:
           - subtractToGetVariation
           - subtractToGetVariation
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           propertyId: propertyId
       properties:
@@ -2555,13 +2555,13 @@ components:
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
         - grn: grn
@@ -2577,13 +2577,13 @@ components:
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
         id: id
@@ -2627,13 +2627,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             enabled: true
@@ -2651,13 +2651,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             enabled: true
@@ -2689,13 +2689,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             enabled: true
@@ -2713,13 +2713,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             enabled: true
@@ -2767,13 +2767,13 @@ components:
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               enabled: true
@@ -2791,13 +2791,13 @@ components:
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               enabled: true
@@ -2829,13 +2829,13 @@ components:
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               enabled: true
@@ -2853,13 +2853,13 @@ components:
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               - subtractToGetVariation:
                 - subtractToGetVariation
                 - subtractToGetVariation
-                propertyType: null
+                propertyType: PROPERTY_TYPE_UNKNOWN
                 propertyValue: propertyValue
                 propertyId: propertyId
               enabled: true
@@ -2892,7 +2892,7 @@ components:
           optionIds:
           - optionIds
           - optionIds
-          propertyMode: null
+          propertyMode: PROPERTY_MODE_UNKNOWN
         - propertyKey: propertyKey
           grn: grn
           propertyType: null
@@ -2901,7 +2901,7 @@ components:
           optionIds:
           - optionIds
           - optionIds
-          propertyMode: null
+          propertyMode: PROPERTY_MODE_UNKNOWN
       properties:
         configurator:
           $ref: '#/components/schemas/configurationConfigurator'
@@ -2925,7 +2925,7 @@ components:
           optionIds:
           - optionIds
           - optionIds
-          propertyMode: null
+          propertyMode: PROPERTY_MODE_UNKNOWN
         - propertyKey: propertyKey
           grn: grn
           propertyType: null
@@ -2934,7 +2934,7 @@ components:
           optionIds:
           - optionIds
           - optionIds
-          propertyMode: null
+          propertyMode: PROPERTY_MODE_UNKNOWN
         steps:
         - grn: grn
           options:
@@ -2951,13 +2951,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
           - grn: grn
@@ -2973,13 +2973,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
           id: id
@@ -3002,13 +3002,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
           - grn: grn
@@ -3024,13 +3024,13 @@ components:
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
             - subtractToGetVariation:
               - subtractToGetVariation
               - subtractToGetVariation
-              propertyType: null
+              propertyType: PROPERTY_TYPE_UNKNOWN
               propertyValue: propertyValue
               propertyId: propertyId
           id: id
@@ -3053,7 +3053,7 @@ components:
         subtractToGetVariation:
         - subtractToGetVariation
         - subtractToGetVariation
-        propertyType: null
+        propertyType: PROPERTY_TYPE_UNKNOWN
         propertyValue: propertyValue
         propertyId: propertyId
       properties:
@@ -3080,7 +3080,7 @@ components:
         optionIds:
         - optionIds
         - optionIds
-        propertyMode: null
+        propertyMode: PROPERTY_MODE_UNKNOWN
       properties:
         id:
           type: string
@@ -3207,7 +3207,7 @@ components:
             hasMultipleSelection: true
             subjectToStepId: subjectToStepId
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          status: null
+          status: UNKNOWN
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
@@ -3295,7 +3295,7 @@ components:
             hasMultipleSelection: true
             subjectToStepId: subjectToStepId
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          status: null
+          status: UNKNOWN
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         configurators:
@@ -3310,7 +3310,7 @@ components:
         conditions:
         - null
         - null
-        type: null
+        type: UNKNOWN
         optionIds:
         - optionIds
         - optionIds
@@ -3342,7 +3342,7 @@ components:
             conditions:
             - null
             - null
-            type: null
+            type: UNKNOWN
             optionIds:
             - optionIds
             - optionIds
@@ -3358,7 +3358,7 @@ components:
             conditions:
             - null
             - null
-            type: null
+            type: UNKNOWN
             optionIds:
             - optionIds
             - optionIds
@@ -3417,10 +3417,10 @@ components:
         matrices:
         - defaultPropertyId: defaultPropertyId
           weightType:
-            weightUnit: null
+            weightUnit: WEIGHT_UNIT_UNKNOWN
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertiesMode: null
+          propertiesMode: PROPERTY_MODE_UNKNOWN
           priceType:
             pricelistGrns:
             - pricelistGrns
@@ -3436,10 +3436,10 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - defaultPropertyId: defaultPropertyId
           weightType:
-            weightUnit: null
+            weightUnit: WEIGHT_UNIT_UNKNOWN
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertiesMode: null
+          propertiesMode: PROPERTY_MODE_UNKNOWN
           priceType:
             pricelistGrns:
             - pricelistGrns
@@ -3474,7 +3474,7 @@ components:
       type: object
     matrixWeightType:
       example:
-        weightUnit: null
+        weightUnit: WEIGHT_UNIT_UNKNOWN
       properties:
         weightUnit:
           $ref: '#/components/schemas/productconfiguratorWeightUnit'
@@ -3587,13 +3587,13 @@ components:
         - subtractToGetVariation:
           - subtractToGetVariation
           - subtractToGetVariation
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           propertyId: propertyId
         - subtractToGetVariation:
           - subtractToGetVariation
           - subtractToGetVariation
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           propertyId: propertyId
         enabled: true
@@ -3651,13 +3651,13 @@ components:
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           enabled: true
@@ -3675,13 +3675,13 @@ components:
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           - subtractToGetVariation:
             - subtractToGetVariation
             - subtractToGetVariation
-            propertyType: null
+            propertyType: PROPERTY_TYPE_UNKNOWN
             propertyValue: propertyValue
             propertyId: propertyId
           enabled: true
@@ -3811,7 +3811,7 @@ components:
           hasMultipleSelection: true
           subjectToStepId: subjectToStepId
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        status: null
+        status: UNKNOWN
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
@@ -3860,7 +3860,7 @@ components:
           conditions:
           - null
           - null
-          type: null
+          type: UNKNOWN
           optionIds:
           - optionIds
           - optionIds
@@ -3914,10 +3914,10 @@ components:
       example:
         defaultPropertyId: defaultPropertyId
         weightType:
-          weightUnit: null
+          weightUnit: WEIGHT_UNIT_UNKNOWN
         createdAt: 2000-01-23T04:56:07.000+00:00
         grn: grn
-        propertiesMode: null
+        propertiesMode: PROPERTY_MODE_UNKNOWN
         priceType:
           pricelistGrns:
           - pricelistGrns
@@ -4143,7 +4143,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4152,7 +4152,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4179,7 +4179,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4188,7 +4188,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4205,7 +4205,7 @@ components:
         propertyKey: propertyKey
         createdAt: 2000-01-23T04:56:07.000+00:00
         grn: grn
-        propertyType: null
+        propertyType: PROPERTY_TYPE_UNKNOWN
         propertyValue: propertyValue
         id: id
         stepIdToOptionId:
@@ -4477,7 +4477,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4486,7 +4486,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4507,7 +4507,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:
@@ -4516,7 +4516,7 @@ components:
         - propertyKey: propertyKey
           createdAt: 2000-01-23T04:56:07.000+00:00
           grn: grn
-          propertyType: null
+          propertyType: PROPERTY_TYPE_UNKNOWN
           propertyValue: propertyValue
           id: id
           stepIdToOptionId:

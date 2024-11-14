@@ -1,4 +1,4 @@
-# product-configurator.Api.ConfigurationApi
+# productconfigurator.Api.ConfigurationApi
 
 All URIs are relative to *https://product-configurator.api.gogemini.io*
 
@@ -20,9 +20,9 @@ Retrieve available configurations for a specific product and tenant. Use a GET r
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -126,9 +126,9 @@ Retrieve available configurations for a specific product and tenant. Use a GET r
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
@@ -232,9 +232,9 @@ Retrieve a configuration based on user selections for a specific product and ten
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using product-configurator.Api;
-using product-configurator.Client;
-using product-configurator.Model;
+using productconfigurator.Api;
+using productconfigurator.Client;
+using productconfigurator.Model;
 
 namespace Example
 {
